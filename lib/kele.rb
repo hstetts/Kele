@@ -26,14 +26,4 @@ class Kele
     response = self.class.get("/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
     JSON.parse(response.body)
   end
-
-  def get_roadmap(roadmap_id)
-    response = Kele.get("/roadmaps/#{roadmap_id}", headers: { "authorization" => @auth_token })
-    JSON.parse(response.body)
-  end
-
-  def get_checkpoint(checkpoint_id)
-    response = Kele.get("/checkpoints/#{checkpoint_id}", headers: { "authorization" => @auth_token })
-    JSON.parse(response.body)
-  end
 end
