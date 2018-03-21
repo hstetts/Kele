@@ -1,4 +1,5 @@
 require 'httparty'
+require 'json'
 
 class Kele
   include HTTParty
@@ -10,24 +11,18 @@ class Kele
         password: password
       }
     }
-    response = self.class.post('/sessions', options)
+    response = self.class.post("/sessions", options)
     @auth_token = response["auth_token"]
     raise "Invalid user credentials" if response.code != 200
   end
 
   def get_me
-    response = self.class.get('/users/me', headers: { "authorization" => @auth_token })
+    response = self.class.get("/users/me", headers: { "authorization" => @auth_token })
     JSON.parse(response.body)
   end
 
   def get_mentor_availability(mentor_id)
-    response = self.class.get('/mentors/529277/student_availability', headers: { "authorization" => @auth_token })
-    availability = []
-    JSON.parse(response.body).each do |open_time|
-      if open_time["booked"] == nil
-        availability << open_time
-      end
-    end
-    availability
+    response = self.class.get("/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
+    JSON.parse(response.body)
   end
 end
