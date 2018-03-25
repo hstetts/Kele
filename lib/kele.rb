@@ -4,7 +4,9 @@ require './lib/roadmap'
 
 class Kele
   include HTTParty
+  include Roadmap
   base_uri 'https://www.bloc.io/api/v1'
+
   def initialize(email, password)
     options = {
       body: {
@@ -38,7 +40,9 @@ class Kele
     JSON.parse(response.body)
   end
 
-  def create_message(recipient_id, subject, message)
-    response = self.class.post("/messages", body: {"recipient_id": recipient_id, "subject": subject, "stripped-text": message }, headers: { "authorization" => @auth_token })
+  def create_message(sender, recipient_id, subject, message)
+    response = self.class.post("/messages", body: {"sender": sender, "recipient_id": recipient_id, "subject": subject, "stripped-text": message }, headers: { "authorization" => @auth_token })
   end
 end
+
+#enrollment id 34707
