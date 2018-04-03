@@ -44,5 +44,3 @@ class Kele
     response = self.class.post("/messages", query: {"sender": sender, "recipient_id": recipient_id, "subject": subject, "stripped-text" => message }, headers: { "authorization": @auth_token })
   end
 end
-
-#enrollment id 34707
