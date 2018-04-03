@@ -41,7 +41,7 @@ class Kele
   end
 
   def create_message(sender, recipient_id, subject, message)
-    response = self.class.post("/messages", body: {"sender": sender, "recipient_id": recipient_id, "subject": subject, "stripped-text": message }, headers: { "authorization" => @auth_token })
+    response = self.class.post("/messages", query: {"sender": sender, "recipient_id": recipient_id, "subject": subject, "stripped-text" => message }, headers: { "authorization": @auth_token })
   end
 end
 
